@@ -1,127 +1,193 @@
 "use client";
 import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Trophy, Target, Dumbbell, Calendar, TrendingUp, Award } from 'lucide-react';
 
-export default function UserProfile() {
-  const [profile, setProfile] = useState({
-    name: '',
-    age: '',
-    weight: '',
-    height: '',
-    fitnessGoal: 'strength', // strength, weightLoss, muscle, endurance
-    experience: 'beginner' // beginner, intermediate, advanced
-  });
+const mockUserData = {
+  name: "Toji's Disciple",
+  level: 7,
+  experience: 2800,
+  nextLevelXp: 3000,
+  streak: 15,
+  totalWorkouts: 45,
+  achievements: [
+    { id: 1, name: "First Blood", description: "Complete your first workout", earned: true },
+    { id: 2, name: "Consistency", description: "Complete 7 workouts in a row", earned: true },
+    { id: 3, name: "Master", description: "Complete all beginner workouts", earned: false },
+  ],
+  stats: {
+    thisWeek: 4,
+    thisMonth: 18,
+    avgWorkoutLength: 45,
+    favoriteExercise: "Pull-ups",
+    totalTime: 2160,
+  },
+  goals: [
+    { id: 1, name: "Weekly Workouts", current: 4, target: 5 },
+    { id: 2, name: "Monthly Time", current: 720, target: 1200 },
+    { id: 3, name: "Push-ups", current: 25, target: 50 },
+  ]
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile(prev => ({
-      ...prev,
-      [name]: value
-    }));
+const UserProfile = () => {
+  const [userData] = useState(mockUserData);
+
+  const calculateProgress = (current, target) => {
+    return Math.min(Math.round((current / target) * 100), 100);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here we would typically save to a backend
-    console.log('Profile updated:', profile);
+  const calculateLevel = (xp) => {
+    const progress = (userData.experience / userData.nextLevelXp) * 100;
+    return Math.floor(progress);
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="glass-card p-8 space-y-8">
-        <h2 className="text-3xl font-bold gradient-text text-center mb-8 neon-glow">
-          Profile Settings
-        </h2>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '100ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={profile.name}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter your name"
-              />
+    <div className="h-[calc(100vh-8rem)] grid grid-cols-12 gap-6">
+      {/* Left Column - Profile Overview */}
+      <div className="col-span-4 space-y-6">
+        {/* Profile Card */}
+        <Card className="relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+          <CardHeader>
+            <CardTitle>Profile</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="text-center">
+              <div className="w-24 h-24 rounded-full bg-primary/20 mx-auto mb-4 flex items-center justify-center">
+                <span className="text-4xl">🥋</span>
+              </div>
+              <h2 className="text-2xl font-bold">{userData.name}</h2>
+              <p className="text-muted-foreground">Level {userData.level} Warrior</p>
             </div>
 
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '200ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Age</label>
-              <input
-                type="number"
-                name="age"
-                value={profile.age}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter your age"
-              />
+            {/* Level Progress */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Level {userData.level}</span>
+                <span>{userData.experience}/{userData.nextLevelXp} XP</span>
+              </div>
+              <Progress value={calculateLevel()} className="h-2" />
             </div>
 
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '300ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Weight (kg)</label>
-              <input
-                type="number"
-                name="weight"
-                value={profile.weight}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter your weight"
-              />
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-3 rounded-lg bg-muted/50">
+                <Calendar className="w-5 h-5 mx-auto mb-1 text-primary" />
+                <div className="text-2xl font-bold">{userData.streak}</div>
+                <div className="text-xs text-muted-foreground">Day Streak</div>
+              </div>
+              <div className="text-center p-3 rounded-lg bg-muted/50">
+                <Dumbbell className="w-5 h-5 mx-auto mb-1 text-primary" />
+                <div className="text-2xl font-bold">{userData.totalWorkouts}</div>
+                <div className="text-xs text-muted-foreground">Workouts</div>
+              </div>
             </div>
+          </CardContent>
+        </Card>
 
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '400ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Height (cm)</label>
-              <input
-                type="number"
-                name="height"
-                value={profile.height}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter your height"
-              />
+        {/* Goals Card */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Goals</CardTitle>
+              <Target className="w-5 h-5 text-primary" />
             </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {userData.goals.map((goal) => (
+              <div key={goal.id} className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span>{goal.name}</span>
+                  <span>{goal.current}/{goal.target}</span>
+                </div>
+                <Progress value={calculateProgress(goal.current, goal.target)} className="h-2" />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
 
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '500ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Fitness Goal</label>
-              <select
-                name="fitnessGoal"
-                value={profile.fitnessGoal}
-                onChange={handleChange}
-                className="input-field"
-              >
-                <option value="strength">Strength Training</option>
-                <option value="weightLoss">Weight Loss</option>
-                <option value="muscle">Muscle Gain</option>
-                <option value="endurance">Endurance</option>
-              </select>
+      {/* Right Column - Stats & Achievements */}
+      <div className="col-span-8 space-y-6">
+        {/* Statistics Card */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Statistics</CardTitle>
+              <TrendingUp className="w-5 h-5 text-primary" />
             </div>
-
-            <div className="space-y-2 fade-in-up" style={{ animationDelay: '600ms' }}>
-              <label className="block text-sm font-medium text-purple-300">Experience Level</label>
-              <select
-                name="experience"
-                value={profile.experience}
-                onChange={handleChange}
-                className="input-field"
-              >
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-              </select>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="p-4 rounded-lg bg-muted/50 space-y-2">
+                <p className="text-sm text-muted-foreground">This Week</p>
+                <p className="text-2xl font-bold">{userData.stats.thisWeek}</p>
+                <p className="text-xs text-muted-foreground">workouts</p>
+              </div>
+              <div className="p-4 rounded-lg bg-muted/50 space-y-2">
+                <p className="text-sm text-muted-foreground">This Month</p>
+                <p className="text-2xl font-bold">{userData.stats.thisMonth}</p>
+                <p className="text-xs text-muted-foreground">workouts</p>
+              </div>
+              <div className="p-4 rounded-lg bg-muted/50 space-y-2">
+                <p className="text-sm text-muted-foreground">Avg. Duration</p>
+                <p className="text-2xl font-bold">{userData.stats.avgWorkoutLength}</p>
+                <p className="text-xs text-muted-foreground">minutes</p>
+              </div>
+              <div className="p-4 rounded-lg bg-muted/50 space-y-2">
+                <p className="text-sm text-muted-foreground">Total Time</p>
+                <p className="text-2xl font-bold">{Math.round(userData.stats.totalTime / 60)}</p>
+                <p className="text-xs text-muted-foreground">hours</p>
+              </div>
             </div>
-          </div>
+          </CardContent>
+        </Card>
 
-          <div className="flex justify-end space-x-4 pt-6 fade-in-up" style={{ animationDelay: '700ms' }}>
-            <button type="button" className="button-secondary">
-              Cancel
-            </button>
-            <button type="submit" className="button-primary">
-              Save Changes
-            </button>
-          </div>
-        </form>
+        {/* Achievements Card */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Achievements</CardTitle>
+              <Trophy className="w-5 h-5 text-primary" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {userData.achievements.map((achievement) => (
+                <div
+                  key={achievement.id}
+                  className={`p-4 rounded-lg ${
+                    achievement.earned ? 'bg-primary/10' : 'bg-muted/50'
+                  } relative overflow-hidden group transition-colors`}
+                >
+                  {achievement.earned && (
+                    <div className="absolute top-0 right-0 p-2">
+                      <Award className="w-5 h-5 text-primary" />
+                    </div>
+                  )}
+                  <h3 className={`font-semibold mb-1 ${
+                    achievement.earned ? 'text-primary' : 'text-muted-foreground'
+                  }`}>
+                    {achievement.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {achievement.description}
+                  </p>
+                  {!achievement.earned && (
+                    <div className="absolute inset-0 bg-background/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-sm font-medium">Keep training!</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
-}
+};
+
+export default UserProfile;

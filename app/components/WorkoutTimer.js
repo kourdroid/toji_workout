@@ -1,138 +1,310 @@
 "use client";
-import { useState, useEffect } from 'react';
 
-export default function WorkoutTimer() {
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [workoutType, setWorkoutType] = useState('work');
+import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Play, Pause, RotateCcw, Settings, Plus, Save } from 'lucide-react';
+import { Slider } from "@/components/ui/slider";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import useTimerStore from '@/app/store/timerStore';
 
-  const presetTimes = {
-    work: [30, 60, 90, 120],
-    rest: [15, 30, 45, 60]
-  };
+const TIMER_PRESETS = [
+  { name: "HIIT", work: 45, rest: 15, rounds: 8 },
+  { name: "Tabata", work: 20, rest: 10, rounds: 8 },
+  { name: "Strength", work: 60, rest: 90, rounds: 5 },
+  { name: "Endurance", work: 120, rest: 30, rounds: 6 },
+  { name: "Quick Burst", work: 30, rest: 10, rounds: 10 },
+];
 
-  useEffect(() => {
-    let interval = null;
-    if (isActive && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft(time => time - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
-      setIsActive(false);
-      if (interval) clearInterval(interval);
-      const audio = new Audio('/timer-end.mp3');
-      audio.play().catch(e => console.log('Audio play failed:', e));
+const formatTime = (seconds) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+};
+
+const WorkoutTimer = () => {
+  const { 
+    time,
+    isRunning,
+    workTime,
+    restTime,
+    currentRound,
+    totalRounds,
+    isWork,
+    customPresets,
+    startTimer,
+    pauseTimer,
+    resetTimer,
+    setWorkTime,
+    setRestTime,
+    setTotalRounds,
+    applyPreset,
+    addCustomPreset
+  } = useTimerStore();
+
+  const [newPreset, setNewPreset] = useState({
+    name: "",
+    work: 30,
+    rest: 10,
+    rounds: 3
+  });
+
+  const saveCustomPreset = () => {
+    if (newPreset.name.trim()) {
+      addCustomPreset({ ...newPreset });
+      setNewPreset({ name: "", work: 30, rest: 10, rounds: 3 });
     }
-    return () => clearInterval(interval);
-  }, [isActive, timeLeft]);
-
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const startTimer = (seconds) => {
-    setTimeLeft(seconds);
-    setIsActive(true);
+  const getTimerColor = () => {
+    if (!isRunning) return 'text-muted-foreground';
+    return isWork ? 'text-blue-400' : 'text-cyan-400';
   };
-
-  const stopTimer = () => {
-    setIsActive(false);
-    setTimeLeft(0);
-  };
-
-  const progress = timeLeft > 0 ? (timeLeft / (presetTimes[workoutType][3])) * 100 : 0;
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-purple-500 to-purple-300 bg-clip-text text-transparent">
-        Workout Timer
-      </h2>
-      
-      {/* Timer Display */}
-      <div className="glass rounded-xl p-6 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
-        <div className="relative w-48 h-48 mx-auto mb-6">
-          <svg className="w-full h-full transform -rotate-90">
-            <circle
-              cx="96"
-              cy="96"
-              r="88"
-              className="stroke-current text-white/5"
-              strokeWidth="8"
-              fill="transparent"
-            />
-            <circle
-              cx="96"
-              cy="96"
-              r="88"
-              className="stroke-current text-purple-500"
-              strokeWidth="8"
-              fill="transparent"
-              strokeDasharray={2 * Math.PI * 88}
-              strokeDashoffset={2 * Math.PI * 88 * (1 - progress / 100)}
-              strokeLinecap="round"
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-purple-300 text-transparent bg-clip-text">
-              {formatTime(timeLeft)}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Main Timer */}
+      <Card className="lg:col-span-8">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-2xl font-bold">
+            Workout Timer
+          </CardTitle>
+          <div className="text-sm text-muted-foreground">
+            Round {currentRound} of {totalRounds}
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col items-center space-y-6">
+            {/* Timer Display */}
+            <div className={`text-8xl font-bold tabular-nums ${getTimerColor()}`}>
+              {formatTime(time)}
+            </div>
+
+            {/* Status */}
+            <div className="text-2xl font-semibold">
+              {time === 0 && !isRunning ? (
+                <span className="text-muted-foreground">Ready</span>
+              ) : (
+                <span className={isWork ? 'text-blue-400' : 'text-cyan-400'}>
+                  {isWork ? 'Work' : 'Rest'}
+                </span>
+              )}
+            </div>
+
+            {/* Controls */}
+            <div className="flex space-x-4">
+              <Button
+                variant="outline"
+                size="icon"
+                className="w-12 h-12"
+                onClick={resetTimer}
+                disabled={time === 0 && !isRunning}
+              >
+                <RotateCcw className="h-6 w-6" />
+              </Button>
+              <Button
+                size="icon"
+                className={`w-16 h-16 rounded-full ${
+                  isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
+                }`}
+                onClick={isRunning ? pauseTimer : startTimer}
+              >
+                {isRunning ? (
+                  <Pause className="h-8 w-8" />
+                ) : (
+                  <Play className="h-8 w-8 ml-1" />
+                )}
+              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="w-12 h-12"
+                  >
+                    <Settings className="h-6 w-6" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Timer Settings</DialogTitle>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Work Time (seconds)</label>
+                      <Slider
+                        value={[workTime]}
+                        onValueChange={([value]) => setWorkTime(value)}
+                        min={5}
+                        max={300}
+                        step={5}
+                      />
+                      <div className="text-right text-sm text-muted-foreground">
+                        {workTime}s
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Rest Time (seconds)</label>
+                      <Slider
+                        value={[restTime]}
+                        onValueChange={([value]) => setRestTime(value)}
+                        min={5}
+                        max={180}
+                        step={5}
+                      />
+                      <div className="text-right text-sm text-muted-foreground">
+                        {restTime}s
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Rounds</label>
+                      <Slider
+                        value={[totalRounds]}
+                        onValueChange={([value]) => setTotalRounds(value)}
+                        min={1}
+                        max={20}
+                        step={1}
+                      />
+                      <div className="text-right text-sm text-muted-foreground">
+                        {totalRounds} rounds
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+
+            {/* Progress Indicators */}
+            <div className="w-full grid grid-cols-2 gap-4 mt-4">
+              <div className="text-center">
+                <div className="text-sm text-muted-foreground">Work</div>
+                <div className="text-lg font-semibold">{formatTime(workTime)}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-sm text-muted-foreground">Rest</div>
+                <div className="text-lg font-semibold">{formatTime(restTime)}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        {/* Timer Type Selection */}
-        <div className="glass rounded-lg p-1">
-          <div className="flex gap-2">
-            <button
-              onClick={() => setWorkoutType('work')}
-              className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                workoutType === 'work'
-                  ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/20'
-                  : 'text-gray-400 hover:bg-purple-500/10 hover:text-purple-300'
-              }`}
-            >
-              Work
-            </button>
-            <button
-              onClick={() => setWorkoutType('rest')}
-              className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                workoutType === 'rest'
-                  ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/20'
-                  : 'text-gray-400 hover:bg-purple-500/10 hover:text-purple-300'
-              }`}
-            >
-              Rest
-            </button>
+      {/* Presets and Custom Timer */}
+      <Card className="lg:col-span-4">
+        <CardHeader>
+          <CardTitle>Timer Presets</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {/* Built-in Presets */}
+            <div className="space-y-2">
+              {TIMER_PRESETS.map((preset, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  className="w-full justify-start text-left"
+                  onClick={() => applyPreset(preset)}
+                >
+                  <div>
+                    <div className="font-medium">{preset.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {preset.work}s work / {preset.rest}s rest / {preset.rounds} rounds
+                    </div>
+                  </div>
+                </Button>
+              ))}
+            </div>
+
+            {/* Custom Presets */}
+            {customPresets.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-sm font-medium text-muted-foreground">Custom Presets</div>
+                {customPresets.map((preset, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    className="w-full justify-start text-left"
+                    onClick={() => applyPreset(preset)}
+                  >
+                    <div>
+                      <div className="font-medium">{preset.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {preset.work}s work / {preset.rest}s rest / {preset.rounds} rounds
+                      </div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            )}
+
+            {/* Create Custom Timer */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="w-full" variant="outline">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Custom Timer
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create Custom Timer</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Preset Name</label>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 rounded-md border bg-background"
+                      value={newPreset.name}
+                      onChange={(e) => setNewPreset({ ...newPreset, name: e.target.value })}
+                      placeholder="Enter preset name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Work Time (seconds)</label>
+                    <Slider
+                      value={[newPreset.work]}
+                      onValueChange={([value]) => setNewPreset({ ...newPreset, work: value })}
+                      min={5}
+                      max={300}
+                      step={5}
+                    />
+                    <div className="text-right text-sm text-muted-foreground">{newPreset.work}s</div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Rest Time (seconds)</label>
+                    <Slider
+                      value={[newPreset.rest]}
+                      onValueChange={([value]) => setNewPreset({ ...newPreset, rest: value })}
+                      min={5}
+                      max={180}
+                      step={5}
+                    />
+                    <div className="text-right text-sm text-muted-foreground">{newPreset.rest}s</div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Rounds</label>
+                    <Slider
+                      value={[newPreset.rounds]}
+                      onValueChange={([value]) => setNewPreset({ ...newPreset, rounds: value })}
+                      min={1}
+                      max={20}
+                      step={1}
+                    />
+                    <div className="text-right text-sm text-muted-foreground">{newPreset.rounds} rounds</div>
+                  </div>
+                  <Button className="w-full" onClick={saveCustomPreset}>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Preset
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
-        </div>
-      </div>
-
-      {/* Preset Times */}
-      <div className="glass rounded-xl p-6 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
-        <h3 className="text-lg font-semibold text-white mb-4">Quick Start</h3>
-        <div className="grid grid-cols-2 gap-3">
-          {presetTimes[workoutType].map((seconds) => (
-            <button
-              key={seconds}
-              onClick={() => startTimer(seconds)}
-              className="py-3 px-4 rounded-lg glass-card hover:bg-purple-500/10 hover:text-purple-300 text-gray-300 transition-all duration-300 font-medium"
-            >
-              {formatTime(seconds)}
-            </button>
-          ))}
-        </div>
-
-        {/* Stop Button */}
-        {isActive && (
-          <button
-            onClick={stopTimer}
-            className="w-full mt-4 py-3 px-4 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300 font-medium"
-          >
-            Stop Timer
-          </button>
-        )}
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
-}
+};
+
+export default WorkoutTimer;

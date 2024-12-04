@@ -60,90 +60,103 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
-      <header className="sticky top-0 left-0 right-0 z-20">
-        <div className="glass border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="py-3 flex items-center justify-between">
-              {/* Logo Section */}
-              <div className="flex items-center space-x-3">
-                <div className="relative">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-xl logo-container">
-                    <span className="text-lg font-bold text-white">T</span>
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-gradient-to-br from-red-500 to-orange-500 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="text-lg font-bold gradient-text">
-                    Toji Workout
-                  </h1>
-                  <p className="text-sm text-gray-400">Unleash Your Inner Strength</p>
-                </div>
-              </div>
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute top-0 left-0 w-full h-full z-[0]">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
+        >
+          <source src="/public.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/80" />
+      </div>
 
-              {/* Right Section */}
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 rounded-xl overflow-hidden glass-card">
-                  <div className="w-full h-full bg-gradient-to-br from-purple-600 to-purple-400"></div>
-                </div>
-              </div>
+      {/* Background Effect */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none"></div>
+      
+      {/* Main Content */}
+      <main className="relative z-10">
+        <div className="max-w-7xl mx-auto p-4">
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-2">
+              Toji Fushiguro Training
+            </h1>
+            <p className="text-muted-foreground">
+              Train like the strongest sorcerer killer
+            </p>
+          </div>
+
+          {/* Content */}
+          <div className="relative">
+            <div
+              className={`transition-all duration-300 ${
+                isTransitioning
+                  ? 'opacity-0 transform translate-y-4'
+                  : 'opacity-100 transform translate-y-0'
+              }`}
+            >
+              {renderContent()}
             </div>
           </div>
         </div>
-      </header>
 
-      <main className="max-w-7xl mx-auto p-4">
-        <div className={`transition-all duration-300 ${
-          isTransitioning
-            ? 'opacity-0 transform translate-y-4'
-            : 'opacity-100 transform translate-y-0'
-        }`}>
-          {renderContent()}
-        </div>
-      </main>
-      
-      <nav className="fixed bottom-0 left-0 right-0 glass mx-auto flex justify-center border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-2">
-          <div className="grid grid-cols-5 gap-3">
-            <NavButton
-              icon={Calendar}
-              isActive={activeTab === 'calendar'}
-              onClick={() => handleTabChange('calendar')}
-            >
-              Calendar
-            </NavButton>
-            <NavButton
-              icon={Dumbbell}
-              isActive={activeTab === 'exercises'}
-              onClick={() => handleTabChange('exercises')}
-            >
-              Exercises
-            </NavButton>
-            <NavButton
-              icon={Timer}
-              isActive={activeTab === 'timer'}
-              onClick={() => handleTabChange('timer')}
-            >
-              Timer
-            </NavButton>
-            <NavButton
-              icon={LineChart}
-              isActive={activeTab === 'progress'}
-              onClick={() => handleTabChange('progress')}
-            >
-              Progress
-            </NavButton>
-            
-            <NavButton
-              icon={User}
-              isActive={activeTab === 'profile'}
-              onClick={() => handleTabChange('profile')}
-            >
-              Profile
-            </NavButton>
+        {/* Navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-border z-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex justify-around py-2">
+              <NavButton
+                icon={Calendar}
+                isActive={activeTab === 'calendar'}
+                onClick={() => handleTabChange('calendar')}
+              >
+                Calendar
+              </NavButton>
+              <NavButton
+                icon={Dumbbell}
+                isActive={activeTab === 'exercises'}
+                onClick={() => handleTabChange('exercises')}
+              >
+                Exercises
+              </NavButton>
+              <NavButton
+                icon={Timer}
+                isActive={activeTab === 'timer'}
+                onClick={() => handleTabChange('timer')}
+              >
+                Timer
+              </NavButton>
+              <NavButton
+                icon={LineChart}
+                isActive={activeTab === 'progress'}
+                onClick={() => handleTabChange('progress')}
+              >
+                Progress
+              </NavButton>
+              <NavButton
+                icon={Trophy}
+                isActive={activeTab === 'levels'}
+                onClick={() => handleTabChange('levels')}
+              >
+                Level
+              </NavButton>
+              <NavButton
+                icon={User}
+                isActive={activeTab === 'profile'}
+                onClick={() => handleTabChange('profile')}
+              >
+                Profile
+              </NavButton>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </main>
     </div>
   );
 }

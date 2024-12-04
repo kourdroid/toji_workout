@@ -1,30 +1,36 @@
 import localFont from "next/font/local";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import FloatingTimer from '@/app/components/FloatingTimer'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  weight: "100 900",
 });
 
 export const metadata = {
-  title: "Toji Fushiguro Workout Program",
-  description: "Train like the strongest sorcerer killer with this progressive calisthenics program",
+  title: "Toji Workout",
+  description: "A workout app inspired by Toji Fushiguro",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-      </head>
-      <body className="">
-      {children}
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <FloatingTimer />
+        </ThemeProvider>
       </body>
     </html>
   );
