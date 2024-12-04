@@ -322,7 +322,7 @@ const WorkoutCalendar = () => {
   return (
     <div className="space-y-6 pb-20">
       {/* Header Section */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 mb-6">
+      <div className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 mb-6">
         <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
           Weekly Workout Schedule
         </h2>

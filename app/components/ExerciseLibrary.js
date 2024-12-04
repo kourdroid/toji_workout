@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChevronRight, X, Search } from "lucide-react";
+import ExerciseCard from "./ExerciseCard";
 import exercisesData from '@/app/data/exercises.json';
 
 const ExerciseLibrary = () => {
@@ -144,58 +145,21 @@ const ExerciseLibrary = () => {
       <ScrollArea className="h-[calc(100vh-12rem)] custom-scrollbar">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-1">
           {filteredExercises.map((exercise, index) => (
-            <Card
+            <ExerciseCard
               key={exercise.id}
-              className={`exercise-card group cursor-pointer ${
-                focusedExerciseIndex === index ? 'ring-2 ring-primary' : ''
-              }`}
+              exercise={exercise}
+              focused={focusedExerciseIndex === index}
               onClick={() => {
                 setSelectedExercise(exercise);
                 setIsModalOpen(true);
               }}
-            >
-              <CardHeader className="relative pb-2">
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
-                    {exercise.name}
-                  </CardTitle>
-                  <Badge className="toji-badge">
-                    {exercise.difficulty}
-                  </Badge>
-                </div>
-                <CardDescription className="text-sm text-muted-foreground">
-                  {exercise.category}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="image-container">
-                  <Image
-                    src={exercise.image}
-                    alt={exercise.name}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {exercise.muscleGroups.map((muscle) => (
-                    <Badge
-                      key={muscle}
-                      variant="outline"
-                      className="text-xs bg-background/50 backdrop-blur-sm"
-                    >
-                      {muscle}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            />
           ))}
         </div>
       </ScrollArea>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="modal-content max-w-3xl">
+        <DialogContent className="modal-content">
           {selectedExercise && (
             <>
               <DialogHeader>

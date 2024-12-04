@@ -1,285 +1,108 @@
 {
   "exercises": [
     {
-      "id": 1,
-      "name": "Day 1: Explosive Push-Ups",
-      "category": "strength",
-      "difficulty": "scalable",
-      "muscleGroups": ["chest", "shoulders", "triceps"],
-      "description": "Focus on pushing the ground explosively as if mimicking a blast movement.",
-      "image": "/exercises/explosive-pushups.jpg",
-      "instructions": {
-        "setup": [
-          "Start in a standard push-up position with hands slightly wider than shoulders",
-          "Keep your core tight and body in a straight line",
-          "Look slightly ahead of your hands for proper neck alignment"
-        ],
-        "execution": [
-          "Lower your body with control until chest nearly touches the ground",
-          "Explosively push up with maximum force",
-          "Allow your hands to leave the ground for advanced variations",
-          "Land softly and immediately prepare for the next rep"
-        ],
-        "commonMistakes": [
-          "Sagging hips or lower back",
-          "Not maintaining full body tension",
-          "Rushing the lowering phase",
-          "Landing too hard after explosive push"
-        ],
-        "breathingPattern": "Inhale during lowering, forcefully exhale during explosive push"
-      },
-      "progression": {
-        "beginner": "3 x 6-8 reps",
-        "intermediate": "4 x 10 reps",
-        "advanced": "5 x 12 reps with clap or lateral jumps",
-        "master": "6 x 15 reps (weighted vest)"
-      }
+      "id": "pushups",
+      "name": "Push-ups",
+      "category": "Upper Body",
+      "difficulty": "Intermediate",
+      "image": "/exercises/pushup.gif",
+      "description": "A classic bodyweight exercise that targets the chest, shoulders, and triceps.",
+      "instructions": [
+        "Start in a plank position with hands slightly wider than shoulders",
+        "Keep your body in a straight line from head to heels",
+        "Lower your body until your chest nearly touches the ground",
+        "Push back up to the starting position",
+        "Keep your core tight throughout the movement"
+      ],
+      "muscles": ["Chest", "Shoulders", "Triceps", "Core"],
+      "tips": [
+        "Keep your elbows at a 45-degree angle",
+        "Look at a spot on the ground about a foot in front of you",
+        "Breathe out as you push up"
+      ]
     },
     {
-      "id": 2,
-      "name": "Day 1: Dips (Parallel Bars)",
-      "category": "strength",
-      "difficulty": "scalable",
-      "muscleGroups": ["chest", "triceps", "shoulders"],
-      "description": "Keep a controlled descent and explosive rise.",
-      "image": "/exercises/dips.jpg",
-      "instructions": {
-        "setup": [
-          "Grip parallel bars with hands shoulder-width apart",
-          "Keep shoulders down and back",
-          "Start with arms fully extended",
-          "Cross ankles behind you for stability"
-        ],
-        "execution": [
-          "Lower body with control, keeping elbows close to body",
-          "Descend until upper arms are parallel to ground",
-          "Push explosively back to starting position",
-          "Maintain slight forward lean for chest emphasis"
-        ],
-        "commonMistakes": [
-          "Letting shoulders rise to ears",
-          "Flaring elbows excessively",
-          "Not maintaining proper depth",
-          "Swinging or using momentum"
-        ],
-        "breathingPattern": "Inhale during descent, exhale forcefully during push"
-      },
-      "progression": {
-        "beginner": "3 x 6-8 reps",
-        "intermediate": "4 x 10 reps",
-        "advanced": "5 x 12 reps (with a pause at the bottom)",
-        "master": "5 x 15 reps (weighted)"
-      }
+      "id": "pullups",
+      "name": "Pull-ups",
+      "category": "Upper Body",
+      "difficulty": "Advanced",
+      "image": "/exercises/pullup.gif",
+      "description": "A challenging upper body exercise that builds back and arm strength.",
+      "instructions": [
+        "Hang from a pull-up bar with hands slightly wider than shoulders",
+        "Pull yourself up until your chin is over the bar",
+        "Lower yourself back down with control",
+        "Keep your core engaged throughout"
+      ],
+      "muscles": ["Back", "Biceps", "Shoulders", "Core"],
+      "tips": [
+        "Start from a dead hang",
+        "Focus on pulling with your back muscles",
+        "Avoid swinging or kipping"
+      ]
     },
     {
-      "id": 3,
-      "name": "Day 1: Advanced Shadowboxing Combos",
-      "category": "combat",
-      "difficulty": "scalable",
-      "muscleGroups": ["full body", "cardio"],
-      "description": "Jab, cross, hook, kick feint, spinning elbow. Simulate real opponents, moving aggressively and defensively.",
-      "image": "/exercises/shadowboxing.jpg",
-      "instructions": {
-        "setup": [
-          "Stand with feet shoulder-width apart, hands up in guard position",
-          "Keep knees slightly bent and weight evenly distributed",
-          "Focus on quick, precise movements"
-        ],
-        "execution": [
-          "Throw combinations of punches and kicks, moving around the room",
-          "Emphasize speed, agility, and reaction time",
-          "Mix up your combinations and footwork patterns",
-          "Maintain proper form throughout"
-        ],
-        "commonMistakes": [
-          "Dropping hands during combinations",
-          "Poor balance during kicks",
-          "Telegraphing moves",
-          "Not using head movement"
-        ],
-        "breathingPattern": "Sharp exhale with each strike, maintain steady breathing during movement"
-      },
-      "progression": {
-        "beginner": "3 rounds x 2 minutes",
-        "intermediate": "5 rounds x 3 minutes",
-        "advanced": "7 rounds x 3 minutes",
-        "master": "10 rounds x 3 minutes"
-      }
+      "id": "squats",
+      "name": "Squats",
+      "category": "Lower Body",
+      "difficulty": "Beginner",
+      "image": "/exercises/squat.gif",
+      "description": "A fundamental lower body exercise that builds leg strength and stability.",
+      "instructions": [
+        "Stand with feet shoulder-width apart",
+        "Keep your chest up and core tight",
+        "Lower your body as if sitting back into a chair",
+        "Keep your knees in line with your toes",
+        "Push through your heels to stand back up"
+      ],
+      "muscles": ["Quadriceps", "Hamstrings", "Glutes", "Core"],
+      "tips": [
+        "Keep your weight in your heels",
+        "Don't let your knees cave inward",
+        "Maintain a neutral spine"
+      ]
     },
     {
-      "id": 4,
-      "name": "Day 1: Explosive Striking with Tire Flip",
-      "category": "combat",
-      "difficulty": "scalable",
-      "muscleGroups": ["full body", "power"],
-      "description": "Combine explosive tire flips with striking combinations.",
-      "image": "/exercises/tire-flip-strike.jpg",
-      "instructions": {
-        "setup": [
-          "Position yourself in front of a heavy tire",
-          "Adopt proper lifting stance",
-          "Keep core engaged and back straight"
-        ],
-        "execution": [
-          "Flip tire explosively",
-          "Immediately throw a combination",
-          "Return to tire flip position",
-          "Maintain high intensity throughout"
-        ],
-        "commonMistakes": [
-          "Rounding back during lift",
-          "Poor striking form when fatigued",
-          "Rushing between transitions",
-          "Inconsistent power output"
-        ],
-        "breathingPattern": "Explosive exhale during flip, rhythmic breathing during strikes"
-      },
-      "progression": {
-        "beginner": "3 rounds x 3 flips + 3 strikes",
-        "intermediate": "4 rounds x 5 flips + 5 strikes",
-        "advanced": "5 rounds x 7 flips + 7 strikes",
-        "master": "6 rounds x 10 flips + 10 strikes"
-      }
+      "id": "burpees",
+      "name": "Burpees",
+      "category": "Full Body",
+      "difficulty": "Advanced",
+      "image": "/exercises/burpee.gif",
+      "description": "A high-intensity full body exercise that builds strength and endurance.",
+      "instructions": [
+        "Start in a standing position",
+        "Drop into a push-up position",
+        "Perform a push-up",
+        "Jump your feet forward to your hands",
+        "Jump up with arms overhead"
+      ],
+      "muscles": ["Full Body", "Core", "Legs", "Chest", "Shoulders"],
+      "tips": [
+        "Keep a quick but controlled pace",
+        "Scale by removing the push-up if needed",
+        "Land softly to protect your joints"
+      ]
     },
     {
-      "id": 5,
-      "name": "Day 2: Heavy Bag Power Combinations",
-      "category": "combat",
-      "difficulty": "scalable",
-      "muscleGroups": ["full body", "power"],
-      "description": "Focus on maximum power output with each strike while maintaining technical precision.",
-      "image": "/exercises/heavy-bag.jpg",
-      "instructions": {
-        "setup": [
-          "Position yourself at optimal striking distance",
-          "Maintain proper stance and guard",
-          "Check bag stability and padding"
-        ],
-        "execution": [
-          "Throw power combinations with full rotation",
-          "Mix up high and low strikes",
-          "Use proper footwork between combinations",
-          "Focus on follow-through with each strike"
-        ],
-        "commonMistakes": [
-          "Arm punching without body rotation",
-          "Poor weight transfer",
-          "Inconsistent power application",
-          "Dropping guard after combinations"
-        ],
-        "breathingPattern": "Sharp exhale with each strike, controlled breathing between combinations"
-      },
-      "progression": {
-        "beginner": "3 rounds x 2 minutes",
-        "intermediate": "5 rounds x 3 minutes",
-        "advanced": "7 rounds x 3 minutes",
-        "master": "10 rounds x 3 minutes"
-      }
-    },
-    {
-      "id": 6,
-      "name": "Day 2: Medicine Ball Slams",
-      "category": "strength",
-      "difficulty": "scalable",
-      "muscleGroups": ["core", "shoulders", "back"],
-      "description": "Explosive full-body movement focusing on power generation and core stability.",
-      "image": "/exercises/med-ball-slams.jpg",
-      "instructions": {
-        "setup": [
-          "Stand with feet shoulder-width apart",
-          "Hold medicine ball at chest height",
-          "Maintain athletic stance"
-        ],
-        "execution": [
-          "Raise ball overhead with explosive movement",
-          "Slam ball to ground with maximum force",
-          "Catch ball on bounce or pickup",
-          "Immediately transition to next rep"
-        ],
-        "commonMistakes": [
-          "Rounding lower back",
-          "Incomplete hip extension",
-          "Letting ball bounce too far",
-          "Rushing between reps"
-        ],
-        "breathingPattern": "Inhale during lift, forceful exhale during slam"
-      },
-      "progression": {
-        "beginner": "3 x 10 reps",
-        "intermediate": "4 x 15 reps",
-        "advanced": "5 x 20 reps",
-        "master": "6 x 25 reps (heavier ball)"
-      }
-    },
-    {
-      "id": 7,
-      "name": "Day 3: Plyometric Box Jumps",
-      "category": "strength",
-      "difficulty": "scalable",
-      "muscleGroups": ["legs", "power"],
-      "description": "Explosive jumping exercises to develop lower body power and coordination.",
-      "image": "/exercises/box-jumps.jpg",
-      "instructions": {
-        "setup": [
-          "Position yourself in front of appropriate height box",
-          "Stand with feet shoulder-width apart",
-          "Maintain athletic stance"
-        ],
-        "execution": [
-          "Drop into quarter squat position",
-          "Jump explosively onto box",
-          "Land softly with bent knees",
-          "Step down carefully and reset"
-        ],
-        "commonMistakes": [
-          "Not using arms for momentum",
-          "Landing with straight legs",
-          "Jumping from too far away",
-          "Rushing the descent"
-        ],
-        "breathingPattern": "Inhale during setup, explosive exhale during jump"
-      },
-      "progression": {
-        "beginner": "3 x 8 reps",
-        "intermediate": "4 x 12 reps",
-        "advanced": "5 x 15 reps",
-        "master": "6 x 20 reps (increased height)"
-      }
-    },
-    {
-      "id": 8,
-      "name": "Day 3: Tire Slammed Sit-Ups",
-      "category": "strength",
-      "difficulty": "scalable",
-      "muscleGroups": ["core", "shoulders"],
-      "description": "Core-focused exercise combining traditional sit-ups with explosive tire strikes.",
-      "image": "/exercises/tire-situps.jpg",
-      "instructions": {
-        "setup": [
-          "Lie on back with knees bent",
-          "Position tire at arms reach above head",
-          "Keep lower back pressed to ground"
-        ],
-        "execution": [
-          "Perform explosive sit-up",
-          "Strike tire at top of movement",
-          "Control descent to starting position",
-          "Maintain core tension throughout"
-        ],
-        "commonMistakes": [
-          "Using momentum instead of core",
-          "Lifting feet off ground",
-          "Rushing the movement",
-          "Poor strike form"
-        ],
-        "breathingPattern": "Inhale during descent, explosive exhale during strike"
-      },
-      "progression": {
-        "beginner": "3 x 10 reps",
-        "intermediate": "4 x 15 reps",
-        "advanced": "5 x 20 reps",
-        "master": "6 x 25 reps (weighted)"
-      }
+      "id": "planks",
+      "name": "Planks",
+      "category": "Core",
+      "difficulty": "Beginner",
+      "image": "/exercises/plank.gif",
+      "description": "An isometric core exercise that builds stability and endurance.",
+      "instructions": [
+        "Start in a forearm plank position",
+        "Keep your body in a straight line",
+        "Engage your core and glutes",
+        "Keep your neck neutral",
+        "Hold the position"
+      ],
+      "muscles": ["Core", "Shoulders", "Back", "Glutes"],
+      "tips": [
+        "Don't let your hips sag",
+        "Breathe steadily throughout",
+        "Focus on quality over duration"
+      ]
     }
   ]
 }
