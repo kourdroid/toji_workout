@@ -102,9 +102,9 @@ export default function Home() {
         </div>
       </main>
       
-      <nav className="fixed bottom-0 left-0 right-0 glass border-t border-white/10">
+      <nav className="fixed bottom-0 left-0 right-0 glass mx-auto flex justify-center border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-2">
-          <div className="grid grid-cols-6 gap-2">
+          <div className="grid grid-cols-5 gap-3">
             <NavButton
               icon={Calendar}
               isActive={activeTab === 'calendar'}
@@ -133,13 +133,7 @@ export default function Home() {
             >
               Progress
             </NavButton>
-            <NavButton
-              icon={Trophy}
-              isActive={activeTab === 'levels'}
-              onClick={() => handleTabChange('levels')}
-            >
-              Levels
-            </NavButton>
+            
             <NavButton
               icon={User}
               isActive={activeTab === 'profile'}
@@ -158,7 +152,7 @@ function NavButton({ icon: Icon, children, isActive, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`nav-button ${isActive ? 'active' : ''} 
+      className={`nav-button  ${isActive ? 'active' : ''} 
         ${isActive 
           ? 'text-primary' 
           : 'text-muted-foreground/80 hover:text-primary/90'
