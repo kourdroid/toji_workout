@@ -12,57 +12,57 @@ const workoutSchedules = {
     grade: '3',
     workouts: {
       monday: {
-        title: 'Back Day',
+        title: 'Day 1: Push Power + Tactical Striking',
         exercises: [
-          "3 x 1-5 Fast pull-ups",
-          "3 x 8-10 Explosive rows",
-          "3 x 10-20s Towel Hangs",
-          "3 x 30-60s Dead hangs"
+          "Explosive Push-Ups: 3 x 6-8 reps",
+          "Dips (Parallel Bars): 3 x 6-8 reps",
+          "Advanced Shadowboxing: 3 x 1-minute rounds (light)",
+          "Tire Flip + Shadowboxing: 3 flips, 3 rounds"
         ]
       },
       tuesday: {
-        title: 'Explosive Chest Day',
+        title: 'Day 2: Pull Strength + Grappling',
         exercises: [
-          "3 x 6-8 Explosive Pushups",
-          "3 x 8-10 Switch grip pushups",
-          "3 x 8-12 Pike pushups",
-          "3 x 15-30s Wall handstand hold"
+          "Assisted Pull-Ups: 3 x 5 reps",
+          "Dead Hangs: 3 x 15 seconds",
+          "Grappling Simulation: 3 x 10 pulls",
+          "Clinch Practice: 3 x 1 minute"
         ]
       },
       wednesday: {
-        title: 'Leg Day',
+        title: 'Day 3: Core Domination',
         exercises: [
-          "3 x 6-8 Single leg hop per leg",
-          "3 x 8-10 Lateral Heiden",
-          "3 x 8-10 Box step-ups",
-          "3 x 10-15 Body squat + hold"
+          "Regular Plank: 3 x 20 seconds",
+          "Tire Sit-Ups: 3 x 8 reps (to knees)",
+          "Lateral Shuffles: 3 x 20 seconds",
+          "Core Stability Work"
         ]
       },
       thursday: {
-        title: 'Rest Day',
+        title: 'Day 4: Push-Pull Combo',
         exercises: [
-          "Active Recovery",
-          "Light Stretching",
-          "Mobility Work",
-          "Stay Hydrated!"
+          "Push-Pull Superset: 3 x 6 push-ups + 6 inverted rows",
+          "Counter-Combat Striking: 3 x 1-minute rounds",
+          "Defensive Drills",
+          "Light Technical Work"
         ]
       },
       friday: {
-        title: 'Biceps Day',
+        title: 'Day 5: Tire Flipping + Sparring',
         exercises: [
-          "3 x 5-8 One arm rows per arm",
-          "3 x 8-10 Supinated rows",
-          "3 x 8-10 Bicep curls",
-          "3 x 30-60s Dead hangs"
+          "Tire Flipping: 3 rounds of 5 flips",
+          "Sparring Simulation: 3 x 1-minute drills",
+          "Recovery Work",
+          "Technique Practice"
         ]
       },
       saturday: {
-        title: 'Triceps Day',
+        title: 'Recovery Day',
         exercises: [
-          "3 x 6-8 per arm Bent arm archer pushups",
-          "3 x 8-10 Diamond pushups",
-          "3 x 10-15s Planche leans",
-          "3 x 6-8 Sphinx pushups"
+          "Active Recovery",
+          "Yoga/Stretching",
+          "Mobility Work",
+          "Mental Training"
         ]
       },
       sunday: {
@@ -80,57 +80,57 @@ const workoutSchedules = {
     grade: '2',
     workouts: {
       monday: {
-        title: 'Back Day',
+        title: 'Day 1: Push Power + Tactical Striking',
         exercises: [
-          "3 x 4-6 Chest-to-bar pull-ups",
-          "3 x 8-10 Wide pullups",
-          "3 x 5-8 Towel pull-ups",
-          "3 x 8-10s Single arm dead hangs"
+          "Explosive Push-Ups: 4 x 10 reps",
+          "Dips (Parallel Bars): 4 x 10 reps",
+          "Advanced Shadowboxing: 4 x 2-minute rounds",
+          "Tire Flip + Shadowboxing: 5 flips, 4 rounds"
         ]
       },
       tuesday: {
-        title: 'Explosive Chest Day',
+        title: 'Day 2: Pull Strength + Grappling',
         exercises: [
-          "3 x 6-8 Explosive Pushups",
-          "3 x 8-10 Switch grip pushups",
-          "3 x 8-12 Pike pushups",
-          "3 x 15-30s Wall handstand hold"
+          "Regular Pull-Ups: 3 x 8 reps",
+          "Active Hangs: 3 x 30 seconds",
+          "Grappling Simulation: 4 x 12 pulls",
+          "Clinch Practice: 4 x 2 minutes"
         ]
       },
       wednesday: {
-        title: 'Leg Day',
+        title: 'Day 3: Core Domination',
         exercises: [
-          "3 x 8-10 Single leg hop per leg",
-          "3 x 10-12 Lateral Heiden",
-          "3 x 8-10 Shrimp squats",
-          "3 x 8-10 Reverse nordic curls"
+          "Shoulder Tap Plank: 3 x 30 seconds",
+          "Tire Sit-Ups: 4 x 10 reps (to shoulder)",
+          "Lateral Shuffles: 4 x 30 seconds",
+          "Advanced Core Work"
         ]
       },
       thursday: {
-        title: 'Rest Day',
+        title: 'Day 4: Push-Pull Combo',
         exercises: [
-          "Active Recovery",
-          "Mobility Work",
-          "Light Cardio",
-          "Stay Hydrated!"
+          "Push-Pull Superset: 4 x 8 push-ups + 8 pull-ups",
+          "Counter-Combat Striking: 4 x 2 minutes",
+          "Advanced Defense",
+          "Technical Combinations"
         ]
       },
       friday: {
-        title: 'Biceps Day',
+        title: 'Day 5: Tire Flipping + Sparring',
         exercises: [
-          "3 x 3-6 Assisted one arm chin-ups",
-          "3 x 8-10 Close grip chin-ups",
-          "3 x 10-15 Supinated rows",
-          "3 x 8-10s False grip hangs"
+          "Tire Flipping: 4 rounds of 7 flips",
+          "Sparring Simulation: 4 x 2 minutes",
+          "Power Development",
+          "Combat Conditioning"
         ]
       },
       saturday: {
-        title: 'Triceps Day',
+        title: 'Recovery Day',
         exercises: [
-          "3 x 10-15 arm Archer pushups",
-          "3 x 8-12 Decline diamond pushups",
-          "3 x 8-10 pseudo-planche pushups",
-          "3 x 8-10 Sphinx pushups"
+          "Active Recovery",
+          "Advanced Mobility",
+          "Flexibility Work",
+          "Mental Training"
         ]
       },
       sunday: {
@@ -148,66 +148,134 @@ const workoutSchedules = {
     grade: '1',
     workouts: {
       monday: {
-        title: 'Back Day',
+        title: 'Day 1: Push Power + Tactical Striking',
         exercises: [
-          "3 x 5-7 Waist-to-bar pull-ups",
-          "3 x 8-10 Front lever raises",
-          "3 x 8-10 Towel pull-ups",
-          "3 x 10-15 Single arm dead hangs"
+          "Explosive Push-Ups: 5 x 12 reps with clap/lateral jumps",
+          "Dips: 5 x 12 reps (pause at bottom)",
+          "Advanced Shadowboxing: 6 x 3-minute rounds",
+          "Tire Flip + Shadowboxing: 7 flips, 5 rounds"
         ]
       },
       tuesday: {
-        title: 'Explosive Chest Day',
+        title: 'Day 2: Pull Strength + Grappling',
         exercises: [
-          "3 x 3-5 Wall handstand pushups",
-          "3 x 10-16 Dynamic Explosive Pushups",
-          "3 x 10-16 Explosive switch grip pushups",
-          "3 x 3-5 Wall walks"
+          "Weighted Pull-Ups: 4 x 10 reps",
+          "Towel Hangs: 4 x 45 seconds",
+          "Grappling Simulation: 5 x 15 pulls",
+          "Clinch Practice: 5 x 3 minutes"
         ]
       },
       wednesday: {
-        title: 'Leg Day',
+        title: 'Day 3: Core Domination',
         exercises: [
-          "3 x 10-12 Single leg hop",
-          "3 x 12-14 Lateral Heiden",
-          "3 x 10-12 Shrimp squats",
-          "3 x 10-12 Sissy squats"
+          "Weighted Plank: 4 x 40 seconds",
+          "Tire Sit-Ups: 4 x 12 reps (overhead slam)",
+          "Lateral Shuffles: 5 x 40 seconds",
+          "Elite Core Training"
         ]
       },
       thursday: {
-        title: 'Rest Day',
+        title: 'Day 4: Push-Pull Combo',
         exercises: [
-          "Active Recovery",
-          "Mobility Work",
-          "Light Cardio",
-          "Stay Hydrated!"
+          "Push-Pull Superset: 5 x 10 explosive push-ups + 10 pull-ups",
+          "Counter-Combat Striking: 6 x 3 minutes",
+          "Elite Defense",
+          "Complex Combinations"
         ]
       },
       friday: {
-        title: 'Biceps Day',
+        title: 'Day 5: Tire Flipping + Sparring',
         exercises: [
-          "3 x 1-2 One-arm chin-up negatives",
-          "3 x 3-5 per arm Type writer pullups",
-          "3 x 15-20 Supinated rows",
-          "3 x 10-15s False grip hangs"
+          "Tire Flipping: 5 rounds of 10 flips",
+          "Sparring Simulation: 5 x 3 minutes",
+          "Maximum Power Output",
+          "Elite Combat Conditioning"
         ]
       },
       saturday: {
-        title: 'Triceps Day',
+        title: 'Recovery Day',
         exercises: [
-          "3 x 3-5 One-arm pushups",
-          "3 x 6-10 planche to 90-degree",
-          "3 x 10-15 Decline diamond pushups",
-          "3 x 10-15 Sphinx Pushups"
+          "Active Recovery",
+          "Elite Mobility",
+          "Advanced Flexibility",
+          "Mental Conditioning"
         ]
       },
       sunday: {
         title: 'Rest Day',
         exercises: [
           "Full Rest",
-          "Recovery",
-          "Stretching",
-          "Prepare for Next Week"
+          "Deep Recovery",
+          "Mobility Work",
+          "Next Week Preparation"
+        ]
+      }
+    }
+  },
+  master: {
+    grade: 'M',
+    workouts: {
+      monday: {
+        title: 'Day 1: Push Power + Tactical Striking',
+        exercises: [
+          "Explosive Push-Ups: 6 x 15 reps (weighted vest)",
+          "Dips: 5 x 15 reps (weighted)",
+          "Advanced Shadowboxing: 8 x 3-minute rounds",
+          "Tire Flip + Shadowboxing: 10 flips, 6 rounds"
+        ]
+      },
+      tuesday: {
+        title: 'Day 2: Pull Strength + Grappling',
+        exercises: [
+          "Explosive Pull-Ups: 5 x 12 reps (chest-to-bar)",
+          "One-Arm Dead Hangs: 5 x 1 minute",
+          "Grappling Simulation: 6 x 20 pulls",
+          "Clinch Practice: 6 x 3 minutes"
+        ]
+      },
+      wednesday: {
+        title: 'Day 3: Core Domination',
+        exercises: [
+          "One-Arm Plank: 5 x 1 minute",
+          "Tire Sit-Ups: 5 sets of max reps (1 min)",
+          "Lateral Shuffles: 6 x 1 minute",
+          "Master Core Training"
+        ]
+      },
+      thursday: {
+        title: 'Day 4: Push-Pull Combo',
+        exercises: [
+          "Push-Pull Superset: 6 x 12 one-arm push-ups + weighted pull-ups",
+          "Counter-Combat Striking: 8 x 3 minutes",
+          "Master Defense",
+          "Elite Combinations"
+        ]
+      },
+      friday: {
+        title: 'Day 5: Tire Flipping + Sparring',
+        exercises: [
+          "Tire Flipping: 6 rounds of 12 flips",
+          "Sparring Simulation: 8 x 3 minutes",
+          "Peak Power Performance",
+          "Master Combat Conditioning"
+        ]
+      },
+      saturday: {
+        title: 'Recovery Day',
+        exercises: [
+          "Active Recovery",
+          "Master Mobility",
+          "Elite Flexibility",
+          "Mental Mastery"
+        ]
+      },
+      sunday: {
+        title: 'Rest Day',
+        exercises: [
+          "Full Rest",
+          "Elite Recovery",
+          "Mobility Mastery",
+          "Next Week Strategy"
         ]
       }
     }
