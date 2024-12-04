@@ -4,6 +4,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const NavButton = ({ icon: Icon, children, isActive, onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex flex-col items-center justify-center space-y-1 w-full py-2 px-1 rounded-lg transition-all duration-300 ${
+        isActive
+          ? 'text-purple-400'
+          : 'text-gray-500 hover:text-purple-300'
+      }`}
+    >
+      <Icon className="w-5 h-5" />
+      <span className="text-[10px] font-medium">{children}</span>
+    </button>
+  );
+};
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -283,10 +300,9 @@ const workoutSchedules = {
 };
 
 const WorkoutCalendar = () => {
-  // Convert JS getDay() (0 = Sunday) to our days array index (0 = Monday)
   const getCurrentDayIndex = () => {
     const today = new Date().getDay();
-    return today === 0 ? 6 : today - 1; // Convert Sunday (0) to 6, and shift other days back by 1
+    return today === 0 ? 6 : today - 1;
   };
 
   const [selectedDay, setSelectedDay] = useState(getCurrentDayIndex());
@@ -295,31 +311,113 @@ const WorkoutCalendar = () => {
   const currentWorkouts = workoutSchedules[selectedLevel].workouts;
   const currentDayWorkouts = currentWorkouts[days[selectedDay].toLowerCase()];
 
+  const goToPreviousDay = () => {
+    setSelectedDay((prev) => (prev === 0 ? 6 : prev - 1));
+  };
+
+  const goToNextDay = () => {
+    setSelectedDay((prev) => (prev === 6 ? 0 : prev + 1));
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-20 ">
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 mb-6">
         <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-purple-500 to-purple-300 bg-clip-text text-transparent">
           Weekly Workout Schedule
         </h2>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {Object.keys(workoutSchedules).map((level) => (
             <button
               key={level}
               onClick={() => setSelectedLevel(level)}
-              className={`px-6 py-3 rounded-xl glass transition-all duration-300 ${
-                selectedLevel === level 
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow-lg shadow-purple-500/20' 
-                : 'text-gray-400 hover:text-purple-300'
+              className={`relative w-8 h-8 rounded-full transition-all flex items-center justify-center ${
+                selectedLevel === level
+                  ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/20'
+                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
+              title={level.charAt(0).toUpperCase() + level.slice(1)}
             >
-              <div className="flex flex-col items-center">
-                <span className="capitalize text-base">{level}</span>
-                <span className="text-sm opacity-75">Grade {workoutSchedules[level].grade}</span>
-              </div>
+              <span className="text-sm font-semibold">
+                {workoutSchedules[level].grade}
+              </span>
+              {selectedLevel === level && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-400 rounded-full" />
+              )}
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden">
+        {/* Week Overview */}
+        <div className="glass rounded-xl p-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-purple-400" />
+              <h3 className="text-lg font-semibold text-purple-400">This Week</h3>
+            </div>
+            <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/20">
+              Grade {workoutSchedules[selectedLevel].grade}
+            </Badge>
+          </div>
+          <div className="flex justify-between gap-1 mt-2">
+            {days.map((day, index) => (
+              <button
+                key={day}
+                onClick={() => setSelectedDay(index)}
+                className={`px-2 py-1 rounded-md text-xs font-medium transition-all ${
+                  selectedDay === index
+                    ? 'bg-purple-500/20 text-purple-400'
+                    : 'text-gray-400 hover:bg-purple-500/10 hover:text-purple-300'
+                }`}
+              >
+                {day.slice(0, 3)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Current Workout */}
+        <div className="glass rounded-xl p-4 mt-3">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-white mb-1">
+                {currentDayWorkouts.title}
+              </h3>
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <span>{days[selectedDay]}</span>
+                <span>•</span>
+                <span className="capitalize">{selectedLevel}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {currentDayWorkouts.exercises.map((exercise, index) => (
+              <div
+                key={index}
+                className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+              >
+                <p className="text-sm text-gray-300">{exercise}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5">
+            <button 
+              className="w-full py-3 bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white rounded-lg transition-colors font-medium text-base shadow-lg shadow-purple-500/20"
+              onClick={() => {
+                // TODO: Implement workout start functionality
+                console.log('Starting workout for:', currentDayWorkouts.title);
+              }}
+            >
+              Start Today's Workout
+            </button>
+          </div>
+        </div>
+
+        {/* Start Workout Button */}
       </div>
 
       {/* Web Layout */}
@@ -336,14 +434,14 @@ const WorkoutCalendar = () => {
                 <span className="text-white text-2xl font-bold">{workoutSchedules[selectedLevel].grade}</span>
               </div>
             </div>
-            
+
             <div className="glass rounded-lg p-6 mb-6">
               <h4 className="text-purple-400 font-semibold mb-4 text-xl">
                 {currentWorkouts[days[selectedDay].toLowerCase()].title}
               </h4>
               <div className="space-y-3">
                 {currentWorkouts[days[selectedDay].toLowerCase()].exercises.map((exercise, i) => (
-                  <div 
+                  <div
                     key={i}
                     className="flex items-center space-x-4 p-4 rounded-lg glass group hover:bg-purple-500/10 transition-colors"
                   >
@@ -370,9 +468,9 @@ const WorkoutCalendar = () => {
               if (index === selectedDay) return null; // Skip today as it's shown on the left
               const workoutKey = day.toLowerCase();
               const dayWorkouts = currentWorkouts[workoutKey];
-              
+
               return (
-                <div 
+                <div
                   key={index}
                   className="glass rounded-lg p-6 hover:bg-white/5 transition-colors group"
                 >
@@ -385,7 +483,7 @@ const WorkoutCalendar = () => {
                   <p className="text-base text-purple-400 mb-3">{dayWorkouts.title}</p>
                   <div className="space-y-2">
                     {dayWorkouts.exercises.map((exercise, i) => (
-                      <div 
+                      <div
                         key={i}
                         className="text-base text-gray-400 group-hover:text-gray-300 transition-colors py-1"
                       >
@@ -398,66 +496,6 @@ const WorkoutCalendar = () => {
             })}
           </div>
         </div>
-      </div>
-
-      {/* Mobile Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
-        {days.map((day, index) => {
-          const workoutKey = day.toLowerCase();
-          const dayWorkouts = currentWorkouts[workoutKey];
-          const isToday = index === selectedDay;
-          
-          return (
-            <div 
-              key={index} 
-              className={`glass group relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 ${
-                isToday ? 'ring-2 ring-purple-500/50' : ''
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <h3 className={`text-lg font-semibold ${
-                    isToday ? 'text-purple-400' : 'text-white group-hover:text-purple-400'
-                  } transition-colors`}>
-                    {day}
-                    {isToday && <span className="ml-2 text-sm text-purple-400">(Today)</span>}
-                  </h3>
-                </div>
-                <div className={`h-6 w-6 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 ${
-                  isToday ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                } transition-opacity`} />
-              </div>
-
-              <div className="text-sm text-gray-400 mb-4">{dayWorkouts.title}</div>
-
-              <div className="space-y-3">
-                {dayWorkouts.exercises.map((exercise, i) => (
-                  <div 
-                    key={i} 
-                    className={`flex items-center justify-between p-2 rounded-lg ${
-                      isToday ? 'bg-purple-500/5' : ''
-                    } hover:bg-white/5 transition-colors group/exercise`}
-                  >
-                    <span className={`text-sm ${
-                      isToday ? 'text-purple-300' : 'text-gray-300 group-hover/exercise:text-purple-300'
-                    } transition-colors`}>
-                      {exercise}
-                    </span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-purple-500 opacity-0 group-hover/exercise:opacity-100 transition-opacity" />
-                  </div>
-                ))}
-              </div>
-
-              {isToday && (
-                <div className="mt-4 pt-4 border-t border-purple-500/10">
-                  <button className="w-full py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
-                    Start Workout
-                  </button>
-                </div>
-              )}
-            </div>
-          );
-        })}
       </div>
     </div>
   );
